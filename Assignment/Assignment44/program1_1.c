@@ -1,0 +1,176 @@
+
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+//
+//      Required header file :
+//
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<stdbool.h>
+
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+//
+//      Declaration of Structure:
+//      it contain : 
+//                      data of node 
+//                      next pointer to points another node
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+//
+struct node 
+{
+    int data;
+    struct node * next;
+
+};
+
+    typedef struct node NODE;
+    typedef struct node * PNODE;
+    typedef struct node ** PPNODE;
+
+
+void Display(PNODE first)
+{
+    while(first != NULL)
+    {
+        printf("|%d|->",first->data);
+        first = first->next;
+    }
+    printf("NULL \n");
+}
+
+int count(PNODE first)
+{
+    int icount = 0;
+    while(first != NULL)
+    {
+        icount++;
+        first = first->next;
+    }
+    return icount;
+}
+
+void InsertFirst(PPNODE first , int no)
+{
+    PNODE newn = NULL;
+    newn = (PNODE)malloc(sizeof(NODE));
+
+    newn->data = no;
+    newn->next = NULL;
+
+    if(*first == NULL)
+    {
+        *first = newn;  
+    }
+    else
+    {
+        newn->next = *first;
+        *first = newn;
+    }
+}
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+//
+//      Function name : BOOL Search
+//      Desciption    : it is use to  Search element in linked list
+//      Input         : ptr(head) , int (no) 
+//      output        :  1 || 0
+//      Author name   : Sakshi kachate
+//      Date          : 29/12/25  
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+//
+
+bool Search(PNODE first , int no)
+{
+     while ( first != NULL)
+     {
+        if(first ->data == no)
+        {
+            return 1;
+        }
+        first = first->next;
+     }
+     return 0;
+     
+}
+
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+//
+//      Entry point Function
+//
+//
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+
+
+int main()
+{
+
+    PNODE head = NULL;
+    int iRet = 0;
+    bool bRet = false;
+    int iValue =0, iEle = 0;
+    int iCnt = 0,iNo = 0;
+
+    
+    printf("How many element to insert int linked list:\n");
+    scanf("%d",&iNo);
+    for(iCnt = 1 ; iCnt <= iNo ; iCnt++)
+    {
+           printf("Enter element %d: ",iCnt);
+            scanf("%d",&iEle);
+             InsertFirst(&head , iEle); 
+    }
+
+      
+    printf("Enter the element to search:");
+    scanf("%d",&iValue);
+    bRet= Search(head,iValue);
+
+    if(bRet == 1)
+    {
+        printf("element are found in linked list");
+    }
+    else
+    {
+        printf("element are  not found in linked list");
+
+    }
+
+    return 0;
+}
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+//
+//      How many element to insert int linked list:
+//      3
+//      Enter element 1: 1
+//      Enter element 2: 11
+//      Enter element 3: 21
+//      Enter the element to search:5
+//      element are  not found in linked list
+//
+
+///////////////////////////////////////////////////////////////////////////////
+
+//      How many element to insert int linked list:
+//      3
+//      Enter element 1: 1
+//      Enter element 2: 11
+//      Enter element 3: 21
+//      Enter the element to search:21
+//      element are found in linked list
+//
+//
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
